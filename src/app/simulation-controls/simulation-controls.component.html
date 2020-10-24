@@ -1,0 +1,33 @@
+<div *ngIf="simulation">
+  <h2>Simulation Details</h2>
+  <div>
+    <label>Solar Watts:
+      <input [(ngModel)]="simulation.solarWatts" placeholder="Watts"/>
+    </label>
+  </div>
+  <div>
+    <label>Panel Volume:
+      <input [(ngModel)]="simulation.panelVolume" placeholder="Volume"/>
+    </label>
+  </div>
+  <div>
+    <label>Starting Temp:
+      <input [(ngModel)]="simulation.startingTemp" placeholder="Starting Temp"/>
+    </label>
+  </div>
+  <div>
+    <label>Efficiancy:
+      <input [(ngModel)]="simulation.panelEfficiancy" placeholder="Percentage"/>
+    </label>
+  </div>
+  <div>
+    <label>Ending Temp:
+      <input [(ngModel)]="simulation.endingTemp" placeholder="Ending Temp"/>
+    </label>
+  </div>
+
+    <button title="Calculate"
+    (click)="getEfficiency(simulation)">Calculate</button>
+
+  FINAL {{finalResult}}
+</div>
