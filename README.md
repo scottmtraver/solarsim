@@ -7,9 +7,21 @@ This project is a sample simulation of heat transfer from a solar panel to a sto
 We are using water as a medium of both solar collection and transfer to the storage/holding tank.
 Any heat loss in the transfer process (pipes) is disregarded at the moment simulating a lossless transfer as we focus only on the use of the storage tank for incrased volume for the solar collector.
 
+I am also making the assumption that the pump, pipes, and tank insulation are lossless meaning the tank is strictly an increase in fluid volume for the system when the pump is in the ON position - it's volume is added to the panel volume seamlessly. in the OFF position only the panel volume is used in calculations
+
+## Angles of What this program is trying to describe about this system:
+We could focus on panel efficiency
+We could focus on temperature throught simulation duration (ticks in hours)
+We could test different fluids
+We could consider certain kinds of lossy tanks/transfer pipes and add those into the system equations and monitoring
+We could focus on external factors such as UV/Watts for inbound energy throughout a 'typical' (or aytypical) day to simulate or report on the system effects
+
 ## Resources
 
 Equations adapted from [Solar Water Heater Efficiency Analysis](https://www.teachengineering.org/content/cub_/activities/cub_solarenergy/cub_solarenergy_lesson01_activity1_worksheet2_tedl_mhf.pdf)
+(I think I found a mistake in the activity above it ended up not passing my tests but led me to further research)
+https://bloglocation.com/art/water-heating-calculator-for-time-energy-power
+Simple calculations
 
 ---
 # Angular and Code Running

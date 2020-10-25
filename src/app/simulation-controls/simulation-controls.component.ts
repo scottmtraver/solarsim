@@ -27,6 +27,8 @@ export class SimulationControlsComponent implements OnInit {
   }
 
   getEfficiency(): void {
-      this.finalResult = this.thermodynamicsService.getEfficiency(this.simulation)
+      const eff = this.thermodynamicsService.getEfficiency(this.simulation)
+      this.simulation.panelEfficiancy = eff;
+      this.finalResult = eff;
   }
 }
