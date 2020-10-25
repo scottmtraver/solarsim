@@ -1,17 +1,29 @@
-export interface Simulation {
+export interface SystemConfig {
     // watts of input to the solar panel
     solarWatts: number;
     // gallons in the solar panel
     panelVolume: number;
-    // // gallons in the storage tank
-    // tankVolume: number;
-    // starting volume of water
-    startingTemp: number;
-    // duration of the simulation in hours
-    duration: number;
-    // efficiancy of the panel as a percentage
-    panelEfficiancy: number;
 
-    // ending volume of water
-    endingTemp: number;
+    // efficiancy of the panel as a percentage
+    panelEfficiancy?: number;
+
+    // gallons in the storage tank
+    tankVolume: number;
+
+    // toggle pump on and/or off
+    pumpIsOn: boolean;
   }
+
+export interface SimulationState {
+    // current temp of fluid in system
+    temp: number;
+
+    // offset of time in hours (starting at 0)
+    hour: number;
+} 
+
+export interface Simulation {
+    config: SystemConfig;
+
+    states: Array<SimulationState>;
+}

@@ -10,16 +10,17 @@ Any heat loss in the transfer process (pipes) is disregarded at the moment simul
 I am also making the assumption that the pump, pipes, and tank insulation are lossless meaning the tank is strictly an increase in fluid volume for the system when the pump is in the ON position - it's volume is added to the panel volume seamlessly. in the OFF position only the panel volume is used in calculations
 
 ## Angles of What this program is trying to describe about this system:
-We could focus on panel efficiency
-We could focus on temperature throught simulation duration (ticks in hours)
-We could test different fluids
-We could consider certain kinds of lossy tanks/transfer pipes and add those into the system equations and monitoring
-We could focus on external factors such as UV/Watts for inbound energy throughout a 'typical' (or aytypical) day to simulate or report on the system effects
+- We could focus on panel efficiency
+- We could focus on temperature throught simulation duration (ticks in hours)
+- We could test different fluids
+- We could consider certain kinds of lossy tanks/transfer pipes and add those into the system equations and monitoring
+- We could focus on external factors such as UV/Watts for inbound energy throughout a 'typical' (or aytypical) day to simulate or report on the system effects
 
 ## Resources
 
 Equations adapted from [Solar Water Heater Efficiency Analysis](https://www.teachengineering.org/content/cub_/activities/cub_solarenergy/cub_solarenergy_lesson01_activity1_worksheet2_tedl_mhf.pdf)
 (I think I found a mistake in the activity above it ended up not passing my tests but led me to further research)
+
 https://bloglocation.com/art/water-heating-calculator-for-time-energy-power
 Simple calculations
 
@@ -49,3 +50,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+# Time
+- Oct 23 initial research 30 min finding links
+- Oct 24 angular setup and component architecture 1hr
+- Oct 24 reviewing test case and finding additional calculations and scoping 1hr
+- Oct 25 overhaul from efficiency to simulation test cases and modeling 1hr

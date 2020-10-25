@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Simulation } from './simulation';
+import { SystemConfig, SimulationState, Simulation } from './simulation';
+import { EquationLibrary } from './equationLibrary';
+
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -14,54 +17,47 @@ export class ThermodynamicsService {
     // NOTE: This is where we could use a substance other than water
     static SUBSTANCE_SPECIFIC_HEAT = 1;
 
-    defaultSimulation = {
-        solarWatts: 480,
-        panelVolume: 2,
-        startingTemp: 60,
-        panelEfficiancy: 0,
-        endingTemp: 106,
-        duration: 1
+    private simulation = {
+        config: {
+            solarWatts: 480,
+            panelVolume: 2,
+            panelEfficiancy: .47
+        } as SystemConfig,
+        states: [{
+            hour: 0,
+            temp: 60
+        }]
     } as Simulation;
 
   constructor() { }
 
     /** GET heroes from the server */
     getSimulation(): Observable<Simulation> {
-        return of(this.defaultSimulation);
+        return of(this.simulation);
       }
 
-    getEfficiency(simulation: Simulation) {
-        const energyIn = this.convertHeatPowerToHeatEnergy(simulation.solarWatts, simulation.duration);
-        const energyOut = this.calculateEnergyDifference(
-            this.convertGallonsToPounds(simulation.panelVolume),
-
-            (simulation.endingTemp - simulation.startingTemp));
+    getEfficiency(simulation: Simulation): number {
+        // validate required fields a complete system and at least 2 states
+        const energyIn = EquationLibrary.convertHeatPowerToHeatEnergy(simulation.config.solarWatts,
+            _.last(simulation.states).hour);
+        const energyOut = EquationLibrary.calculateEnergyDifference(
+            EquationLibrary.convertGallonsToPounds(simulation.config.panelVolume),
+            (_.last(simulation.states).temp - _.first(simulation.states).temp));
         return energyOut / energyIn;
     }
 
-    // UTILITIES
-
-    // return BTU
-    private convertHeatPowerToHeatEnergy(watts: number, duration: number): number {
-        return (watts * duration) * ThermodynamicsService.BTU_WATT_HOUR;
-    }
-
-    // return cubic feet (volume)
-    private convertGallonsToCubicFeet(gallons: number): number {
-        return gallons * ThermodynamicsService.GAL_CUB_FT;
-    }
-
-    // return pounds (mass)
-    private convertVolumeToPounds(cubicFeet: number): number {
-        return cubicFeet * ThermodynamicsService.CUB_FT_LBS;
-    }
-
-    private convertGallonsToPounds(gallons: number): number {
-        return this.convertVolumeToPounds(this.convertGallonsToCubicFeet(gallons));
-    }
-
-    // mass in lbs, temp delta in degrees F - returns BTU for substance
-    private calculateEnergyDifference(mass: number, tempDelta: number): number {
-        return mass * ThermodynamicsService.SUBSTANCE_SPECIFIC_HEAT * tempDelta;
+    // adds a state to the end of the simulation based on the config and previous state
+    tickSimulation(simulation: Simulation): void {
+        // validate requirements (watts, efficiency, volume (pump status), at least 1 state)
+        const latestState = _.last(simulation.states)
+        const newState = {
+            hour: latestState.hour + 1,
+            temp: latestState.temp + EquationLibrary.calculateTempChange(
+                EquationLibrary.convertHeatPowerToHeatEnergy(simulation.config.solarWatts * simulation.config.panelEfficiancy, 1),
+                EquationLibrary.convertGallonsToPounds(simulation.config.panelVolume)
+            )
+        } as SimulationState;
+        console.log(newState)
+        simulation.states.push(newState);
     }
 }

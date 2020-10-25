@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Simulation } from '../simulation';
+import { SystemConfig } from '../simulation';
 import { ThermodynamicsService } from '../thermodynamics.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { ThermodynamicsService } from '../thermodynamics.service';
 })
 export class SimulationControlsComponent implements OnInit {
 
-    simulation: Simulation;
-    finalResult: number
+    system: SystemConfig;
 
   constructor(
     private thermodynamicsService: ThermodynamicsService,
@@ -23,12 +22,12 @@ export class SimulationControlsComponent implements OnInit {
 
   getSimulation(): void {
     this.thermodynamicsService.getSimulation()
-    .subscribe(simulation => this.simulation = simulation);
+    .subscribe(simulation => this.system = simulation.config);
   }
 
   getEfficiency(): void {
-      const eff = this.thermodynamicsService.getEfficiency(this.simulation)
-      this.simulation.panelEfficiancy = eff;
-      this.finalResult = eff;
+    //   const eff = this.thermodynamicsService.getEfficiency(this.system)
+    //   this.simulation.panelEfficiancy = eff;
+    //   this.finalResult = eff;
   }
 }
