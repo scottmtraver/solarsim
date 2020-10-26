@@ -1,0 +1,12 @@
+<table *ngIf="stateList" class="ui celled table">
+  <thead>
+    <tr><th>Hour</th>
+    <th>Temp</th>
+  </tr></thead>
+  <tbody>
+    <tr *ngFor="let cur of stateList" >
+      <td data-label="Hour">{{cur.hour}}</td>
+      <td data-label="Temp">{{cur.temp}}</td>
+    </tr>
+  </tbody>
+</table>
