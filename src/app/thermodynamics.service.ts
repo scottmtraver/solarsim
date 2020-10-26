@@ -17,11 +17,14 @@ export class ThermodynamicsService {
     // NOTE: This is where we could use a substance other than water
     static SUBSTANCE_SPECIFIC_HEAT = 1;
 
+    // initial state
     private simulation = {
         config: {
             solarWatts: 480,
             panelVolume: 2,
-            panelEfficiancy: .47
+            panelEfficiancy: .47,
+            tankVolume: 2,
+            pumpIsOn: false
         } as SystemConfig,
         states: [{
             hour: 0,
@@ -49,12 +52,16 @@ export class ThermodynamicsService {
     // adds a state to the end of the simulation based on the config and previous state
     tickSimulation(simulation: Simulation): void {
         // validate requirements (watts, efficiency, volume (pump status), at least 1 state)
-        const latestState = _.last(simulation.states)
+        const latestState = _.last(simulation.states);
+        let totalVolume = simulation.config.panelVolume;
+        if (simulation.config.pumpIsOn) {
+            totalVolume += simulation.config.tankVolume;
+        }
         const newState = {
             hour: latestState.hour + 1,
             temp: latestState.temp + EquationLibrary.calculateTempChange(
                 EquationLibrary.convertHeatPowerToHeatEnergy(simulation.config.solarWatts * simulation.config.panelEfficiancy, 1),
-                EquationLibrary.convertGallonsToPounds(simulation.config.panelVolume)
+                EquationLibrary.convertGallonsToPounds(totalVolume)
             )
         } as SimulationState;
         console.log(newState)

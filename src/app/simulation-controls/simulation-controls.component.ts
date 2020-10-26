@@ -12,6 +12,7 @@ export class SimulationControlsComponent implements OnInit {
     simulation: Simulation;
     running: boolean;
     tick: any; // timer ID
+    totalVolume: 100
 
     private interval = 1000; // simulation ms
 
@@ -38,6 +39,10 @@ export class SimulationControlsComponent implements OnInit {
 
   tickSimulation(): void {
       this.thermodynamicsService.tickSimulation(this.simulation);
+  }
+
+  togglePump(): void {
+      this.simulation.config.pumpIsOn = !this.simulation.config.pumpIsOn;
   }
 
   toggleSimulation(): void {

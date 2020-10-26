@@ -18,7 +18,19 @@
           <div class="ui label">Gallons</div>
           <input
             [(ngModel)]="simulation.config.panelVolume"
-            placeholder="Volume"
+            placeholder="Gallons"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Tank Volume</label>
+        <div class="ui labeled input">
+          <div class="ui label">Gallons</div>
+          <input
+            [(ngModel)]="simulation.config.tankVolume"
+            placeholder="Gallons"
           />
         </div>
       </div>
@@ -33,18 +45,22 @@
         </div>
       </div>
     </div>
-      <button class="ui labeled icon button" (click)="toggleSimulation()">
-        <i class="icon" [ngClass]="{'pause': running, 'play': !running}"></i>
-        <span *ngIf="running">Pause</span>
-        <span *ngIf="!running">Start</span>
-      </button>
-      <button class="ui right labeled icon button" (click)="tickSimulation()">
-        <i class="level down alternate icon"></i>
-        Advance
-      </button>
-      <button class="ui right labeled icon button" (click)="resetSimulation()">
-        <i class="redo icon"></i>
-        Reset
-      </button>
+    <button class="ui labeled icon button" (click)="toggleSimulation()">
+      <i class="icon" [ngClass]="{ pause: running, play: !running }"></i>
+      <span *ngIf="running">Pause</span>
+      <span *ngIf="!running">Start</span>
+    </button>
+    <button class="ui right labeled icon button" (click)="tickSimulation()">
+      <i class="level down alternate icon"></i>
+      Advance
+    </button>
+    <button class="ui right labeled icon button" (click)="resetSimulation()">
+      <i class="redo icon"></i>
+      Reset
+    </button>
+    <div class="ui toggle checkbox" (click)="togglePump()">
+      <input type="checkbox" name="pump" />
+      <label>Pump</label>
+    </div>
   </div>
 </div>
