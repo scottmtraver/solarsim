@@ -84,3 +84,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Oct 24 angular setup and component architecture 1hr
 - Oct 24 reviewing test case and finding additional calculations and scoping 1hr
 - Oct 25 overhaul from efficiency to simulation test cases and modeling 1hr
+- Oct 25 add styling, interactive controls, graphic demonstration, note code for improvement or SME to implement real formulas
