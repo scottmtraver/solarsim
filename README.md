@@ -2,6 +2,33 @@
 
 This project is a sample simulation of heat transfer from a solar panel to a storage tank.
 
+[Live Demo](https://scottmtraver.github.io/solarsim/)
+
+The controls for the system are:
+- Solar Energy (incoming energy in watts) 
+- Heat Exchange Panel Size (in gallons of water contained)
+- Tank Size (in gallons of water)
+- Heat Exchange Panel Efficiency (as a percentage)
+- Pump On/off
+
+The pump system is naive. When in the on position the total volume of the system includes both panel volume and tank volume. There is no temperature degredation or loss in insulation and the pump circulates endlessly and instantly.
+When in the off position only the heat exchange panel volume of water is used.
+
+The current temperature is the last line of the simulation results.
+
+There are no boundaries to simulation (related to maximum temperature of water or any other component).
+
+Running the simulation takes the current system inputs and calculates a new temp simulating 1 hour of passing time each second. You can also manually advance the simulation.
+
+## Uncompleted Work Ideas
+- Stubbed out method for using a medium other than water
+- When you turn the pump on the two bodies of fluid should calculate a new temperature as they merge
+- I wanted to put a UV -> Wattage simulation in to simulate a typical sun path throughout a day (or randomize)
+- Fluid should cool off at a given rate
+- Starting temp should be selectable
+- D3 line chart of temp would be easy
+- Information can be added directly on the graphic (demonstrated by pump status)
+
 ## Assumptions
 
 We are using water as a medium of both solar collection and transfer to the storage/holding tank.

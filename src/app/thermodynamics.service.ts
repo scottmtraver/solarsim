@@ -58,6 +58,7 @@ export class ThermodynamicsService {
             totalVolume += simulation.config.tankVolume;
         }
         const newState = {
+            // TODO interval is fixed to hour currently
             hour: latestState.hour + 1,
             temp: latestState.temp + EquationLibrary.calculateTempChange(
                 EquationLibrary.convertHeatPowerToHeatEnergy(simulation.config.solarWatts * simulation.config.panelEfficiancy, 1),
